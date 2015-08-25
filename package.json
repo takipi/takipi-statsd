@@ -13,7 +13,7 @@
     "type": "git",
     "url": "https://github.com/takipi/takipi-statsd"
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "dependencies": {
     "statsd": "",
     "statsd-zabbix-backend": "",
