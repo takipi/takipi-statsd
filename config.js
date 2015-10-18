@@ -112,38 +112,39 @@
 
   alerts: {
     dispatchers: {
-      slackDispatcher: { //this defines a an integration into Slack
-        type: "slack",
-        config: {
-          host: "https://hooks.slack.com", 
-token: "<SLACK_TOKEN>", //your Slack API key. See more here - http://bit.ly/1hwuDdF
-username: "statsd-alerts", //the user name which is posting the alert
-channel: "#alerts" //the target Slack channel to which this alert will be posted
-        }
-      },
-
-      pagerdutyDispatcher: { //this defines a an integration into PagerDuty
-        type: "pagerduty",
-        config: {
-          key: "<PAGERDUTY_SERVICE_KEY>" // PagerDuty API key. See more - http://bit.ly/1UBKu8Q
-        }
-      },
-
-      sentryDispatcher: { //this defines a an integration into Sentry
-        type: "sentry",
-        config: {
-          dsn: "<SENTRY_DSN>"
-        }
-      },
-
-      hipchatDispatcher: {
-        type: "hipchat",
-        config: {
-          key: "<HIPCHAT_KEY>", // Hipchat API key from: https://<ACCOUNT>.hipchat.com/account/api
-          room: "takipi", // Room to send alerts to
-          color: "red"
-        }
-      }
+//  UNCOMMENT THE DISPATCHER YOU WANT
+//       slackDispatcher: { //this defines a an integration into Slack
+//         type: "slack",
+//         config: {
+//           host: "https://hooks.slack.com", 
+// token: "<SLACK_TOKEN>", //your Slack API key. See more here - http://bit.ly/1hwuDdF
+// username: "statsd-alerts", //the user name which is posting the alert
+// channel: "#alerts" //the target Slack channel to which this alert will be posted
+//         }
+//       },
+// 
+//       pagerdutyDispatcher: { //this defines a an integration into PagerDuty
+//         type: "pagerduty",
+//         config: {
+//           key: "<PAGERDUTY_SERVICE_KEY>" // PagerDuty API key. See more - http://bit.ly/1UBKu8Q
+//         }
+//       },
+// 
+//       sentryDispatcher: { //this defines a an integration into Sentry
+//         type: "sentry",
+//         config: {
+//           dsn: "<SENTRY_DSN>"
+//         }
+//       },
+// 
+//       hipchatDispatcher: {
+//         type: "hipchat",
+//         config: {
+//           key: "<HIPCHAT_KEY>", // Hipchat API key from: https://<ACCOUNT>.hipchat.com/account/api
+//           room: "takipi", // Room to send alerts to
+//           color: "red"
+//         }
+//       }
     },
     events: [{
       name: "*", //any metric fired matching this pattern will be sent out as an alert
@@ -151,10 +152,10 @@ channel: "#alerts" //the target Slack channel to which this alert will be posted
     }],
 
     metrics: [{
-name: "*", //name of the metric
-type: "counter_rates",
-gte: 0.2, //operator: gte, gt, lte, lt, eq, delta, delta_gte, delta_gt, delta_lte, delta_lt, delta_eq //delta is the difference between the current sample and the previous one
-alert: "pagerdutyDispatcher" //the service (e.g,PagerDuty) to which this alert is sent.
+      name: "*", //name of the metric
+      type: "counters",
+      gte: 1, //operator: gte, gt, lte, lt, eq, delta, delta_gte, delta_gt, delta_lte, delta_lt, delta_eq //delta is the difference between the current sample and the previous one
+      dispatcher: "pagerdutyDispatcher" //the service (e.g,PagerDuty) to which this alert is sent.
     }]
   }
 */
